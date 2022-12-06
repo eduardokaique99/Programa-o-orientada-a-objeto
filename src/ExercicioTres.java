@@ -36,10 +36,44 @@ public class ExercicioTres {
         switch (menu) {
             // 1) Crie um programa que receba um valor e calcule a tabuada deste valor, salvando seu resultado em um arquivo de texto.
             case 1:
-                // tabuada(int number);
+            int[] tabuada = new int[10];
+            try{
+                System.out.println("Informe o número:");
+                int number = scanner.nextInt();
+                tabuada = tabuada(number);
+                System.out.println("TABUADA");
+                for (int i = 1; i <= 10; i++) { 
+                System.out.println(i + " x " + number + " = " + tabuada[i-1]);  
+                    }
+
+                BufferedWriter escrita = new BufferedWriter(new FileWriter("C:/Users/eduardo.furlaneto/OneDrive - SENAC-SC/Programa-o-orientada-a-objeto/texto.txt"));
+                
+                for (Integer integer : tabuada) {
+                    escrita.append(integer + "\n");
+                    }
+                    escrita.close();
+                } catch (Exception e) {
+                    System.err.println("Deu ruim parceiro");
+                    }
+                
                 break;
             // 2) Crie um programa que leia e imprima no console todas as linhas de um arquivo de texto.
             case 2:
+            try{
+                BufferedReader leitura = new BufferedReader(new FileReader("C:/Users/eduardo.furlaneto/OneDrive - SENAC-SC/Programa-o-orientada-a-objeto/texto.txt"));
+                String value = "";
+                System.out.println("DADOS DO ARQUIVO");
+                while (true){
+                    if(value != null)
+                    System.out.println(value);
+                    else
+                    break;
+                    value = leitura.readLine();
+                }
+                leitura.close();
+            } catch (IOException exception){
+                System.out.println("Erro de exceção I/O: " + exception.getMessage());
+            }
                 // lerArquivoTexto(String arquivo);
                 break;
             // 3) Crie um programa que receba como entrada da classe Main dois valores numéricos e calcule as operações básicas com eles.
@@ -85,8 +119,12 @@ public class ExercicioTres {
         
     }
 
-    public static void tabuada(int numero) {
-        
+    public static int[] tabuada(int number) {
+        int[] tabuada = new int[10];
+        for (int i = 1; i <= 10; i++) {
+            tabuada[i-1] = number * i;
+        }
+        return tabuada;
     }
 
     public static void lerArquivoTexto(String arquivo) {
